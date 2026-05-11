@@ -12,7 +12,7 @@ def main():
     args = parser.parse_args()
     
     if args.version:
-        print("VIBEcod 2.0.0")
+        print("VIBEcod 2.1.1")
         return
     
     # Единый интерпретатор для всего
@@ -28,7 +28,7 @@ def main():
         with open(args.file, 'r') as f:
             run_code(f.read(), interp)
     else:
-        print("\033[96mVIBEcod REPL v2.0\033[0m")
+        print("\033[96mVIBEcod REPL v2.1.1\033[0m")
         while True:
             try:
                 line = input("\033[93mvibe> \033[0m")
