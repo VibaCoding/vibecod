@@ -1,0 +1,9 @@
+setup.py
+vibecod/__init__.py
+vibecod/__main__.py
+vibecod/core.py
+vibecod.egg-info/PKG-INFO
+vibecod.egg-info/SOURCES.txt
+vibecod.egg-info/dependency_links.txt
+vibecod.egg-info/entry_points.txt
+vibecod.egg-info/top_level.txt

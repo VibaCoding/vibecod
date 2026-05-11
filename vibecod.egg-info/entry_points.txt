@@ -1,0 +1,3 @@
+[console_scripts]
+vibe = vibecod.__main__:main
+vibecod = vibecod.__main__:main
