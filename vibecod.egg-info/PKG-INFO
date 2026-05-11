@@ -1,7 +1,36 @@
 Metadata-Version: 2.4
 Name: vibecod
 Version: 2.0.0
-Summary: VIBE Language
-Author: VIBE Team
+Summary: VIBE Language — гибридный язык с квантовой душой
+Home-page: https://github.com/VibaCoding/vibecod
+Author: VibaCoding
+Author-email: roma.lukanin.00@gmail.com
+Project-URL: Bug Tracker, https://github.com/VibaCoding/vibecod/issues
+Project-URL: Source Code, https://github.com/VibaCoding/vibecod
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Interpreters
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
 Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: project-url
+Dynamic: requires-python
 Dynamic: summary
+
+# VIBEcod
+
+VIBE Language — гибридный язык с квантовой душой
+
+## Установка
+
+```bash
+pip install vibecod
+vibe -c 'spit("Hello VIBE!")'

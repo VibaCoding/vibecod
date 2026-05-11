@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import sys
 import argparse
-from .core import run_code, run_file, Interpreter, Lexer, Parser
+from .core import run_code, Interpreter
 
 def main():
     parser = argparse.ArgumentParser(description="VIBEcod Language")
@@ -15,15 +15,20 @@ def main():
         print("VIBEcod 2.0.0")
         return
     
+    # Единый интерпретатор для всего
+    interp = Interpreter()
+    
     if args.command:
-        # Режим "как у clang": vibecod -c 'spit("hello")'
-        run_code(args.command)
+        cmd = args.command.strip()
+        # Если это не вызов spit/spit_color и не ключевое слово — обернём в spit
+        if not cmd.startswith(('spit', 'spit_color', 'loopit', 'maybe', 'fn', 'vibe', 'yeet', 'florp', 'use')):
+            cmd = f'spit({cmd})'
+        run_code(cmd, interp=None, print_expr=True)
     elif args.file:
-        run_file(args.file)
+        with open(args.file, 'r') as f:
+            run_code(f.read(), interp)
     else:
-        # REPL режим
         print("\033[96mVIBEcod REPL v2.0\033[0m")
-        interp = Interpreter()
         while True:
             try:
                 line = input("\033[93mvibe> \033[0m")
@@ -35,19 +40,7 @@ def main():
             if not line.strip():
                 continue
             try:
-                lexer = Lexer(line)
-                tokens = lexer.tokenize()
-                parser = Parser(tokens)
-                ast = parser.parse()
-                if ast.statements:
-                    last = ast.statements[-1]
-                    from .core import ExprStmt
-                    if isinstance(last, ExprStmt):
-                        res = interp.eval(last.expr, interp.globals)
-                        if res is not None:
-                            print(f"\033[90m=> {interp._str(res)}\033[0m")
-                    else:
-                        interp.exec(last, interp.globals)
+                run_code(line, interp)
             except Exception as e:
                 print(f"\033[91m{e}\033[0m")
 
