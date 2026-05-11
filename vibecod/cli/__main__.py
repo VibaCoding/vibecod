@@ -1,13 +1,12 @@
 import sys
-from vibecod.core import run_code
+from vibecod.core.interpreter import run_file
 
 def main():
     if len(sys.argv) < 2:
-        print("vibe <file>")
+        print("usage: vibe <file>")
         return
 
-    with open(sys.argv[1]) as f:
-        run_code(f.read())
+    run_file(sys.argv[1])
 
 if __name__ == "__main__":
     main()

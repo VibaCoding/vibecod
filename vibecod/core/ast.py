@@ -1,57 +1,80 @@
-from dataclasses import dataclass, field
-from typing import Any, List, Optional
-
-@dataclass
 class Node:
-    line: int = 0
-    col: int = 0
+    pass
 
-@dataclass
-class NumLit(Node):
-    value: Any = None
 
-@dataclass
-class StrLit(Node):
-    value: str = ""
-
-@dataclass
-class BoolLit(Node):
-    value: bool = False
-
-@dataclass
-class VarExpr(Node):
-    name: str = ""
-
-@dataclass
-class BinOp(Node):
-    left: Node = None
-    op: str = ""
-    right: Node = None
-
-@dataclass
-class CallExpr(Node):
-    callee: Node = None
-    args: List[Node] = field(default_factory=list)
-
-@dataclass
-class AssignExpr(Node):
-    name: str = ""
-    value: Node = None
-
-@dataclass
-class VarDecl(Node):
-    var_type: str = ""
-    name: str = ""
-    value: Node = None
-
-@dataclass
-class SpitStmt(Node):
-    value: Node = None
-
-@dataclass
-class ExprStmt(Node):
-    expr: Node = None
-
-@dataclass
 class Program(Node):
-    statements: List[Node] = field(default_factory=list)
+    def __init__(self, statements):
+        self.statements = statements
+
+
+# -------- expressions --------
+
+class NumLit(Node):
+    def __init__(self, value):
+        self.value = value
+
+
+class StrLit(Node):
+    def __init__(self, value):
+        self.value = value
+
+
+class VarExpr(Node):
+    def __init__(self, name):
+        self.name = name
+
+
+class BinOp(Node):
+    def __init__(self, left, op, right):
+        self.left = left
+        self.op = op
+        self.right = right
+
+
+# -------- statements --------
+
+class ExprStmt(Node):
+    def __init__(self, expr):
+        self.expr = expr
+
+
+class SpitStmt(Node):
+    def __init__(self, value):
+        self.value = value
+
+
+class VarDecl(Node):
+    def __init__(self, name, value):
+        self.name = name
+        self.value = value
+
+
+class AssignStmt(Node):
+    def __init__(self, name, value):
+        self.name = name
+        self.value = value
+
+
+class IfStmt(Node):
+    def __init__(self, condition, body, else_body=None):
+        self.condition = condition
+        self.body = body
+        self.else_body = else_body
+
+
+class WhileStmt(Node):
+    def __init__(self, condition, body):
+        self.condition = condition
+        self.body = body
+
+
+class FuncDecl(Node):
+    def __init__(self, name, params, body):
+        self.name = name
+        self.params = params
+        self.body = body
+
+
+class ReturnStmt(Node):
+    def __init__(self, value):
+        self.value = value
